@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.json());
 
-app.post("/equipos", async (req, res) => {
+app.post("/api/equipos", async (req, res) => {
   const {
     nombreEquipo,
     institucion,
@@ -29,38 +29,38 @@ app.post("/equipos", async (req, res) => {
     res.status(201).json(result);
   } catch (error) {
     res.status(500).json({
-      message: "Something went wrong :(",
+      message: "Error inesperado.",
       error: error.message,
     });
   }
 });
 
 //mostrar todos los registros
-app.get("/equipos", async (req, res) => {
+app.get("/api/equipos", async (req, res) => {
   try {
     const teams = await prisma.equipos.findMany();
     res.status(200).json(teams);
   } catch (error) {
     res.status(500).json({
-      message: "Something went wrong :(",
+      message: "Error inesperado.",
       error: error.message,
     });
   }
 });
 
-app.get("/jugadores", async (req, res) => {
+app.get("/api/jugadores", async (req, res) => {
   try {
     const jugador = await prisma.jugadores.findMany();
     res.status(200).json(jugador);
   } catch (error) {
     res.status(500).json({
-      message: "Something went wrong :(",
+      message: "Error inesperado.",
       error: error.message,
     });
   }
 });
 
-app.get("/jugador/buscar/:nombre", async (req, res) => {
+app.get("/api/jugador/:nombre", async (req, res) => {
   const { nombre } = req.params;
   try {
     const jugadores = await prisma.jugadores.findMany({
@@ -74,13 +74,13 @@ app.get("/jugador/buscar/:nombre", async (req, res) => {
     res.status(200).json(jugadores);
   } catch (error) {
     res.status(500).json({
-      message: "Jugador no encontrado :(",
+      message: "Jugador no encontrado.",
       error: error.message,
     });
   }
 });
 
-app.post("/jugador", async (req, res) => {
+app.post("/api/jugador", async (req, res) => {
   const {
     nombres,
     apellidos,
@@ -103,7 +103,7 @@ app.post("/jugador", async (req, res) => {
     res.status(201).json(result);
   } catch (error) {
     res.status(500).json({
-      message: "Something went wrong :(",
+      message: "Error inesperado.",
       error: error.message,
     });
   }
