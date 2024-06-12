@@ -6,7 +6,7 @@ const app = express();
 
 app.use(express.json());
 
-app.post("/team", async (req, res) => {
+app.post("/equipos", async (req, res) => {
   const {
     nombreEquipo,
     institucion,
@@ -36,7 +36,7 @@ app.post("/team", async (req, res) => {
 });
 
 //mostrar todos los registros
-app.get("/teams", async (req, res) => {
+app.get("/equipos", async (req, res) => {
   try {
     const teams = await prisma.equipos.findMany();
     res.status(200).json(teams);
